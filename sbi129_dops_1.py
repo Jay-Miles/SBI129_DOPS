@@ -4,31 +4,7 @@
 
 Write a program to create a reverse complement from a DNA sequence,
 and explain the development environment, the data source, the libraries
-used and the algorithm employed. 
-
-Development environment
-- OS: Linux, Ubuntu 22.04.1 LTS
-- Code editor: Visual Studio Code v1.59.0
-
-Data source:
-- NCBI Nucleotide database - SALL2 gene RefSeqGene FASTA sequence
-- https://www.ncbi.nlm.nih.gov/nuccore/NG_051069.1?from=15871&to=21137&report=fasta
-
-Libraries:
-- No external libraries used
-
-Algorithm:
-- Original data is a text file containing a FASTA DNA record
-- Read in entire file contents as a single string
-- Confirm contents are in basic FASTA format using assertions
-- Remove FASTA header from DNA sequence using a string slice
-- Convert sequence to uppercase using .upper() string method
-- Remove newline/return characters using .join() and list comprehension
-- Replace non-nucleotide characters using .join() and list comprehension
-- Reverse order of string characters using a string slice
-- Get the complementary sequence using .join() and list comprehension
-- Write the resulting sequence out to another text file
-"""
+used and the algorithm employed. """
 
 
 def read_file(input_file):
@@ -71,14 +47,16 @@ def clean_input(dna_sequence):
 
     # remove newlines and carriage returns
 
-    no_newlines = ''.join([char for char in capitalised \
+    no_newlines = ''.join([
+        char for char in capitalised
         if char not in ['\n', '\r']])
 
     # replace non-nucleotide characters with 'X'
 
     keep = ['A', 'C', 'G', 'T', 'N', ' ']
 
-    cleaned = ''.join([char if char in keep \
+    cleaned = ''.join([
+        char if char in keep
         else 'X' for char in no_newlines])
 
     return cleaned
@@ -107,7 +85,8 @@ def dna_complement(dna_sequence):
         't' : 'A',
         'T' : 'A'}
 
-    output_sequence = ''.join([map[char] if char in map.keys() \
+    output_sequence = ''.join([
+        map[char] if char in map.keys()
         else char for char in dna_sequence])
 
     return output_sequence
